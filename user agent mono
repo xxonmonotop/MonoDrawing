@@ -4,7 +4,7 @@ local old_request = request or http.request or http_request
 local function new_request(options)
     if type(options) == "table" then
         options.Headers = options.Headers or {}
-        options.Headers["User-Agent"] = "Mono - Zync, qfs0, d3v (love you all!)" 
+        options.Headers["User-Agent"] = "Mono" 
     end
 
     local success, response = pcall(function()
