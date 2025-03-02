@@ -1,0 +1,30 @@
+local HttpService = game:GetService("HttpService")
+local old_request = request or http.request or http_request
+
+local function new_request(options)
+    if type(options) == "table" then
+        options.Headers = options.Headers or {}
+        options.Headers["User-Agent"] = "Mono - Zync, qfs0, d3v (love you all!)" 
+    end
+
+    local success, response = pcall(function()
+        return old_request(options)
+    end)
+
+    if success then
+        return response
+    else
+        warn("Request failed: " .. tostring(response))
+    end
+
+    return nil
+end
+
+getgenv().request = new_request
+getgenv().http_request = new_request
+getgenv().http = { request = new_request }
+
+local result = new_request({
+    Url = "https://httpbin.org/user-agent",
+    Method = "GET"
+})
