@@ -1,0 +1,3 @@
+getgenv().getexecutorname = function()
+    return "Mono"
+end
